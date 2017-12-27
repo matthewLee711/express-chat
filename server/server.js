@@ -16,7 +16,7 @@ io.on('connection', (socket) => {
   console.log('New user connected');
 
   // Send from server to client
-  socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat'));
+  socket.emit('newMessage', generateMessage('Admin', 'Welcome to the Matt chatapp'));
 
   socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined'));
 
