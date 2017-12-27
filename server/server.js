@@ -15,13 +15,19 @@ io.on('connection', (socket) => {
   console.log('New user connected');
 
   // Send from server to client
-  // socket.emit('newMessage', {
-  //   from: 'matt',
-  //   text: 'WHats up',
-  //   createdAt: 123123 
-  // });
+  socket.emit('newMessage', {
+    from: 'Admin',
+    text: 'Welcome to the chat',
+    createdAt: new Date().getTime()
+  });
 
-  // Send from client to server
+  socket.broadcast.emit('newMessage', {
+    from: 'Admin',
+    text: 'New user joined',
+    createdAt: new Date().getTime()
+  });
+
+  // Sent from client to server
   socket.on('createMessage', (message) => {
     console.log('createMessage', message);
     io.emit('newMessage', {
@@ -40,3 +46,8 @@ io.on('connection', (socket) => {
 server.listen(port, () => {
   console.log(`Server is up on port ${port}`);
 });
+
+
+// use io.emit(newMessage) to send message to everyone
+// use socket.braodcast.emit to emit to everyone but yourself
+// socket.emit send to specific connection
